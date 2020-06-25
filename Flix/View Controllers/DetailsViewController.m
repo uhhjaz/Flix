@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *posterView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *synopsisLabel;
+@property (weak, nonatomic) IBOutlet UILabel *releaseDateLabel;
 
 @end
 
@@ -35,11 +36,23 @@
     NSURL *backdropURL = [NSURL URLWithString:fullBackdropURLString];
     [self.backdropView setImageWithURL:backdropURL];
     
+    
+    // get date in form YYYY-MM-DD, change to Month Day Year
+    NSString *numDate = self.movie[@"release_date"];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"YYYY-MM-dd"];
+    NSDate *date = [dateFormat dateFromString:numDate];
+    [dateFormat setDateFormat:@"MMMM dd YYYY"];
+    NSString* dateInWords = [dateFormat stringFromDate:date];
+
+    
     self.titleLabel.text = self.movie[@"title"];
     self.synopsisLabel.text = self.movie[@"overview"];
+    self.releaseDateLabel.text = dateInWords;
     
     [self.titleLabel sizeToFit];
     [self.synopsisLabel sizeToFit];
+    [self.releaseDateLabel sizeToFit];
 }
 
 
