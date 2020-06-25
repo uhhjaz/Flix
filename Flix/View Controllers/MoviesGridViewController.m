@@ -13,9 +13,9 @@
 @interface MoviesGridViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
 
-@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-
 @property (nonatomic, strong) NSArray *movies;
+
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @end
 

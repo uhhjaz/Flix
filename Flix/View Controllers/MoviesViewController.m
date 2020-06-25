@@ -36,11 +36,15 @@
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchMovies) forControlEvents:UIControlEventValueChanged];
-    //[self.tableView insertSubview:self.refreshControl atIndex:0];
-    [self.tableView addSubview:self.refreshControl];
+    [self.tableView insertSubview:self.refreshControl atIndex:0];
+    //[self.tableView addSubview:self.refreshControl];
 
-    //[activityIndicator layer]
+    self.activityIndicator.layer.cornerRadius = 6;
+    
+    
+    
     [self.activityIndicator startAnimating];
+
     
 }
 
@@ -134,6 +138,13 @@
     NSString *fullPosterURLString = [baseURLString stringByAppendingString:posterURLString];
     
     NSURL *posterURL = [NSURL URLWithString:fullPosterURLString];
+    
+    cell.posterView.layer.cornerRadius = 6;
+    
+    cell.posterViewBg.layer.cornerRadius = 6;
+    cell.posterViewBg.layer.shadowColor = UIColor.blackColor.CGColor;
+    cell.posterViewBg.layer.shadowRadius = 4;
+    cell.posterViewBg.layer.shadowOpacity = 0.45;
     
     [cell.posterView setImageWithURL:posterURL];
     

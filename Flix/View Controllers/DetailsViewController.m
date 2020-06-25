@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *synopsisLabel;
 @property (weak, nonatomic) IBOutlet UILabel *releaseDateLabel;
+@property (weak, nonatomic) IBOutlet UIView *posterViewBg;
 
 @end
 
@@ -28,6 +29,13 @@
     NSString *fullPosterURLString = [baseURLString stringByAppendingString:posterURLString];
     
     NSURL *posterURL = [NSURL URLWithString:fullPosterURLString];
+    self.posterView.layer.cornerRadius = 6;
+    
+    self.posterViewBg.layer.cornerRadius = 6;
+    self.posterViewBg.layer.shadowColor = UIColor.blackColor.CGColor;
+    self.posterViewBg.layer.shadowRadius = 4;
+    self.posterViewBg.layer.shadowOpacity = 0.45;
+    
     [self.posterView setImageWithURL:posterURL];
     
     NSString *backdropURLString = self.movie[@"backdrop_path"];
