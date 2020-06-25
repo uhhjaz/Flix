@@ -10,6 +10,7 @@
 #import "MovieCell.h"
 #import "DetailsViewController.h"
 #import "UIImageView+AFNetworking.h"
+#import <QuartzCore/QuartzCore.h>
 
 
 
@@ -18,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray *movies;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @end
 
@@ -36,16 +38,54 @@
     [self.refreshControl addTarget:self action:@selector(fetchMovies) forControlEvents:UIControlEventValueChanged];
     //[self.tableView insertSubview:self.refreshControl atIndex:0];
     [self.tableView addSubview:self.refreshControl];
+
+    //[activityIndicator layer]
+    [self.activityIndicator startAnimating];
+    
 }
 
 - (void) fetchMovies {
     NSURL *url = [NSURL URLWithString:@"https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed"];
+    
+    
     NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10.0];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
            if (error != nil) {
+               
+               
                NSLog(@"%@", [error localizedDescription]);
+               
+               UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Cannot Get Movies"
+                      message:@"The internet connection appears to be offline."
+               preferredStyle:(UIAlertControllerStyleAlert)];
+               
+               // create a cancel action
+               UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel"
+                                                                   style:UIAlertActionStyleCancel
+                                                                 handler:^(UIAlertAction * _Nonnull action) {
+                                                                        // handle cancel response here. Doing nothing will dismiss the view.
+                                                                 }];
+               // add the cancel action to the alertController
+               [alert addAction:cancelAction];
+               
+               // create Try Again action
+               UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Try Again"
+                                                                  style:UIAlertActionStyleDefault
+                                                                handler:^(UIAlertAction * _Nonnull action) {
+                                                                        // handle response here.
+                                                                       [self fetchMovies];
+                                                                        
+                                                                }];
+               
+               // add the OK action to the alert controller
+               [alert addAction:okAction];
+               
+               [self presentViewController:alert animated:YES completion:^{
+               }];
+               
            }
+        
            else {
                
                //Get the array of movies
@@ -63,8 +103,13 @@
                
                //Reload table view data
                [self.tableView reloadData];
+               
+           
            }
+           
            [self.refreshControl endRefreshing];
+        
+           [self.activityIndicator stopAnimating];
        }];
     [task resume];
 }
