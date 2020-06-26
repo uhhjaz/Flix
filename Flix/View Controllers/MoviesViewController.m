@@ -21,6 +21,9 @@
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
+
+
+
 @end
 
 @implementation MoviesViewController
@@ -135,9 +138,18 @@
     
     NSString *baseURLString = @"https://image.tmdb.org/t/p/w500";
     NSString *posterURLString = movie[@"poster_path"];
+    
+    // check for '/' in beginning of poster_path
+    unichar firstChar = [posterURLString characterAtIndex:0];
+    if (firstChar != '/') {
+        posterURLString = [@"/" stringByAppendingString:posterURLString];
+    }
+    
     NSString *fullPosterURLString = [baseURLString stringByAppendingString:posterURLString];
     
     NSURL *posterURL = [NSURL URLWithString:fullPosterURLString];
+    
+    //cell.selectionStyle = UITableViewCellSelectionStyleGray;
     
     cell.posterView.layer.cornerRadius = 6;
     

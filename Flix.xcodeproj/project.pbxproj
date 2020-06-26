@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		380F96477107296CBB8CF811 /* Pods_FlixTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C40EFD6A5A6CC6376FFD8C /* Pods_FlixTests.framework */; };
+		3A78EF5B24A650E1008FB9D1 /* MovieTrailerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A78EF5A24A650E1008FB9D1 /* MovieTrailerViewController.m */; };
+		3A78EF5D24A652E8008FB9D1 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A78EF5C24A652E8008FB9D1 /* WebKit.framework */; };
 		3A9FBDD324A3BD8400C7C461 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9FBDD224A3BD8400C7C461 /* AppDelegate.m */; };
 		3A9FBDD624A3BD8400C7C461 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9FBDD524A3BD8400C7C461 /* SceneDelegate.m */; };
 		3A9FBDDC24A3BD8400C7C461 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A9FBDDA24A3BD8400C7C461 /* Main.storyboard */; };
@@ -46,6 +48,9 @@
 		07C40EFD6A5A6CC6376FFD8C /* Pods_FlixTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlixTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		16DA0DA6BA9577E556876C33 /* Pods_Flix_FlixUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Flix_FlixUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		38032D80105EA51762086721 /* Pods-Flix.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flix.debug.xcconfig"; path = "Target Support Files/Pods-Flix/Pods-Flix.debug.xcconfig"; sourceTree = "<group>"; };
+		3A78EF5924A650E1008FB9D1 /* MovieTrailerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MovieTrailerViewController.h; sourceTree = "<group>"; };
+		3A78EF5A24A650E1008FB9D1 /* MovieTrailerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MovieTrailerViewController.m; sourceTree = "<group>"; };
+		3A78EF5C24A652E8008FB9D1 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		3A9FBDCE24A3BD8400C7C461 /* Flix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A9FBDD124A3BD8400C7C461 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3A9FBDD224A3BD8400C7C461 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -85,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A78EF5D24A652E8008FB9D1 /* WebKit.framework in Frameworks */,
 				B5908201E1BC0C235D274124 /* Pods_Flix.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -189,6 +195,8 @@
 				3A9FBE1324A462C000C7C461 /* DetailsViewController.m */,
 				3A9FBE1524A48C9600C7C461 /* MoviesGridViewController.h */,
 				3A9FBE1624A48C9600C7C461 /* MoviesGridViewController.m */,
+				3A78EF5924A650E1008FB9D1 /* MovieTrailerViewController.h */,
+				3A78EF5A24A650E1008FB9D1 /* MovieTrailerViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -214,6 +222,7 @@
 		424C2AA826EF35BB4AC0343D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3A78EF5C24A652E8008FB9D1 /* WebKit.framework */,
 				768003147C4F77C1AED0D79C /* Pods_Flix.framework */,
 				16DA0DA6BA9577E556876C33 /* Pods_Flix_FlixUITests.framework */,
 				07C40EFD6A5A6CC6376FFD8C /* Pods_FlixTests.framework */,
@@ -459,6 +468,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A78EF5B24A650E1008FB9D1 /* MovieTrailerViewController.m in Sources */,
 				3A9FBDD324A3BD8400C7C461 /* AppDelegate.m in Sources */,
 				3A9FBE0E24A3EFA900C7C461 /* MovieCell.m in Sources */,
 				3A9FBE0824A3C46F00C7C461 /* MoviesViewController.m in Sources */,
