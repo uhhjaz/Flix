@@ -19,8 +19,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    //self.urlString = @"https://www.youtube.com/watch?v=SUXWAEX2jlg";
-    
     NSURL *url = [NSURL URLWithString:self.urlString];
 
     // Place the URL in a URL Request.

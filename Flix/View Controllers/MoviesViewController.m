@@ -30,8 +30,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
+    // Do any additional setup after loading the view.
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
@@ -43,11 +43,7 @@
     //[self.tableView addSubview:self.refreshControl];
 
     self.activityIndicator.layer.cornerRadius = 6;
-    
-    
-    
     [self.activityIndicator startAnimating];
-
     
 }
 
@@ -97,7 +93,6 @@
                
                //Get the array of movies
                NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-
                NSLog(@"%@", dataDictionary);
                
                //Store the movies in a property to use elsewhere
@@ -107,15 +102,11 @@
                    NSLog(@"%@", movie[@"title"]);
                }
 
-               
                //Reload table view data
                [self.tableView reloadData];
                
-           
            }
-           
            [self.refreshControl endRefreshing];
-        
            [self.activityIndicator stopAnimating];
        }];
     [task resume];
@@ -130,13 +121,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     MovieCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MovieCell"];
-    
     NSDictionary *movie = self.movies[indexPath.row];
 
     cell.titleLabel.text = movie[@"title"];
     cell.synopsisLabel.text = movie[@"overview"];
     
-    NSString *baseURLString = @"https://image.tmdb.org/t/p/w500";
     NSString *posterURLString = movie[@"poster_path"];
     
     // check for '/' in beginning of poster_path
@@ -145,22 +134,27 @@
         posterURLString = [@"/" stringByAppendingString:posterURLString];
     }
     
-    NSString *fullPosterURLString = [baseURLString stringByAppendingString:posterURLString];
+    // low res poster image
+    NSString *lowResBaseString = @"https://image.tmdb.org/t/p/w45";
+    NSString *fullLowResPosterURLString = [lowResBaseString stringByAppendingString:posterURLString];
+    NSURL *posterLowResURL = [NSURL URLWithString:fullLowResPosterURLString];
+    [cell.posterView setImageWithURL:posterLowResURL];
+    [cell.posterBackgroundView setImageWithURL:posterLowResURL];
     
-    NSURL *posterURL = [NSURL URLWithString:fullPosterURLString];
-    
-    //cell.selectionStyle = UITableViewCellSelectionStyleGray;
+    // high res poster image
+    NSString *highResBaseString = @"https://image.tmdb.org/t/p/original";
+    NSString *fullHighResPosterURLString = [highResBaseString stringByAppendingString:posterURLString];
+    NSURL *posterHighResURL = [NSURL URLWithString:fullHighResPosterURLString];
+    [cell.posterView setImageWithURL:posterHighResURL];
+    [cell.posterBackgroundView setImageWithURL:posterHighResURL];
     
     cell.posterView.layer.cornerRadius = 6;
-    
     cell.posterViewBg.layer.cornerRadius = 6;
     cell.posterViewBg.layer.shadowColor = UIColor.blackColor.CGColor;
     cell.posterViewBg.layer.shadowRadius = 4;
-    cell.posterViewBg.layer.shadowOpacity = 0.45;
+    cell.posterViewBg.layer.shadowOpacity = 0.55;
+    cell.posterViewBg.layer.shadowOffset = CGSizeMake(6, 6);
     
-    [cell.posterView setImageWithURL:posterURL];
-    
-    [cell.posterBackgroundView setImageWithURL:posterURL];
     return cell;
 }
 

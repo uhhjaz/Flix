@@ -32,7 +32,6 @@
     
     [self fetchMovies];
     
-    
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
     
     CGFloat postersPerLine = 2;
@@ -86,6 +85,12 @@
     
     cell.posterView.layer.cornerRadius = 8;
     cell.posterViewBg.layer.cornerRadius = 8;
+    
+    cell.posterViewBg.layer.shadowColor = UIColor.blackColor.CGColor;
+    cell.posterViewBg.layer.shadowRadius = 3;
+    cell.posterViewBg.layer.shadowOpacity = 1;
+    cell.posterViewBg.layer.shadowOffset = CGSizeMake(8, 8);
+    [cell.posterBlurBackground setImageWithURL:posterURL];
     [cell.posterView setImageWithURL:posterURL];
     
     return cell;
@@ -100,9 +105,6 @@
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
     
     UICollectionViewCell *tappedCell = sender;
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:tappedCell];

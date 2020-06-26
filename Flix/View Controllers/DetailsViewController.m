@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UIView *posterViewBg;
 @property (weak, nonatomic) IBOutlet UIView *overviewBg;
 @property (nonatomic, strong) NSString *trailerURL;
+@property (weak, nonatomic) IBOutlet UIButton *trailerButton;
 
 
 @end
@@ -58,6 +59,12 @@
     self.overviewBg.layer.shadowOpacity = .80;
     
     
+    self.trailerButton.layer.cornerRadius = self.trailerButton.frame.size.height / 2;
+    self.trailerButton.layer.shadowColor = UIColor.blackColor.CGColor;
+    self.trailerButton.layer.shadowRadius = 3;
+    self.trailerButton.layer.shadowOpacity = .55;
+    self.trailerButton.layer.shadowOffset = CGSizeMake(3, 3);
+    
     [self.posterView setImageWithURL:posterURL];
     
     NSString *backdropURLString = self.movie[@"backdrop_path"];
@@ -78,7 +85,6 @@
     self.synopsisLabel.text = self.movie[@"overview"];
     self.releaseDateLabel.text = dateInWords;
     
-    
     [self.titleLabel sizeToFit];
     [self.synopsisLabel sizeToFit];
     [self.releaseDateLabel sizeToFit];
@@ -94,7 +100,6 @@
     NSString *baseURLString = @"https://api.themoviedb.org/3/movie/";
     NSString *movieID = self.movie[@"id"];
     NSString *fullURLRequestString = [baseURLString stringByAppendingFormat:@"%@/videos?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&language=en-US", movieID];
-
     NSLog(@"%@", fullURLRequestString);
     
     NSURL *url = [NSURL URLWithString:fullURLRequestString];
@@ -110,7 +115,6 @@
                   
                   //Get the array of movies
                   NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-                  
                   NSLog(@"%@", dataDictionary);
                   
                   //Store the movies in a property to use elsewhere
@@ -118,13 +122,11 @@
                   
                   NSDictionary *featureTrailer = movieTrailers[0];
                   NSString *key = featureTrailer[@"key"];
-                  NSString *youtubeBaseURL = @"https://www.youtube.com/watch?v=";
-                  
                   NSLog(@"THE MOVIE KEY IS:%@", key);
                   
+                  NSString *youtubeBaseURL = @"https://www.youtube.com/watch?v=";
                   self.trailerURL = [youtubeBaseURL stringByAppendingString:key];
                   NSLog(@"THE YOUTUBE URL IS:%@", self.trailerURL);
-                  
               }
           }];
        [task resume];
