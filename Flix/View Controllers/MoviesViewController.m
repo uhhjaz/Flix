@@ -14,13 +14,14 @@
 
 
 
-@interface MoviesViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface MoviesViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) NSArray *movies;
-@property (nonatomic, strong) UIRefreshControl *refreshControl;
+@property (strong, nonatomic) NSArray *movies;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
-
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (strong, nonatomic) NSArray *filteredData;
 
 
 
@@ -34,52 +35,55 @@
     // Do any additional setup after loading the view.
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    self.searchBar.delegate = self;
     
     [self fetchMovies];
     
+    // add refresh controller
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchMovies) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
-    //[self.tableView addSubview:self.refreshControl];
 
+    // loading state while waiting for the movies API begins animating
     self.activityIndicator.layer.cornerRadius = 6;
     [self.activityIndicator startAnimating];
     
 }
 
 - (void) fetchMovies {
+    
+    // make api url for now playing movies
     NSURL *url = [NSURL URLWithString:@"https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed"];
     
-    
+    // complete api call
     NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10.0];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-           if (error != nil) {
-               
-               
+           
+        if (error != nil) {
+
                NSLog(@"%@", [error localizedDescription]);
                
-               UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Cannot Get Movies"
-                      message:@"The internet connection appears to be offline."
+               // creates alert to user
+               UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Cannot Get Movies" message:@"The internet connection appears to be offline."
                preferredStyle:(UIAlertControllerStyleAlert)];
                
                // create a cancel action
                UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel"
-                                                                   style:UIAlertActionStyleCancel
-                                                                 handler:^(UIAlertAction * _Nonnull action) {
-                                                                        // handle cancel response here. Doing nothing will dismiss the view.
-                                                                 }];
+                                                            style:UIAlertActionStyleCancel
+                                                            handler:^(UIAlertAction * _Nonnull action) {
+               
+                                                            }];
                // add the cancel action to the alertController
                [alert addAction:cancelAction];
                
                // create Try Again action
                UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Try Again"
-                                                                  style:UIAlertActionStyleDefault
-                                                                handler:^(UIAlertAction * _Nonnull action) {
-                                                                        // handle response here.
-                                                                       [self fetchMovies];
+                                                            style:UIAlertActionStyleDefault
+                                                            handler:^(UIAlertAction * _Nonnull action) {
+                                                                [self fetchMovies];
                                                                         
-                                                                }];
+                                                            }];
                
                // add the OK action to the alert controller
                [alert addAction:okAction];
@@ -97,6 +101,7 @@
                
                //Store the movies in a property to use elsewhere
                self.movies = dataDictionary[@"results"];
+               self.filteredData = dataDictionary[@"results"];
                
                for (NSDictionary *movie in self.movies) {
                    NSLog(@"%@", movie[@"title"]);
@@ -114,15 +119,17 @@
 
 // shows how many rows we have
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.movies.count;
+    return self.filteredData.count;
 }
 
 // creates and configures a cell
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    // creates cell from movie
     MovieCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MovieCell"];
-    NSDictionary *movie = self.movies[indexPath.row];
+    NSDictionary *movie = self.filteredData[indexPath.row];
 
+    // displays movie descriptions
     cell.titleLabel.text = movie[@"title"];
     cell.synopsisLabel.text = movie[@"overview"];
     
@@ -135,19 +142,31 @@
     }
     
     // low res poster image
-    NSString *lowResBaseString = @"https://image.tmdb.org/t/p/w45";
-    NSString *fullLowResPosterURLString = [lowResBaseString stringByAppendingString:posterURLString];
-    NSURL *posterLowResURL = [NSURL URLWithString:fullLowResPosterURLString];
-    [cell.posterView setImageWithURL:posterLowResURL];
-    [cell.posterBackgroundView setImageWithURL:posterLowResURL];
+    if ([movie[@"poster_path"] isKindOfClass:[NSString class]]) {
+        NSString *lowResBaseString = @"https://image.tmdb.org/t/p/w45";
+        NSString *fullLowResPosterURLString = [lowResBaseString stringByAppendingString:posterURLString];
+        NSURL *posterLowResURL = [NSURL URLWithString:fullLowResPosterURLString];
+        [cell.posterView setImageWithURL:posterLowResURL];
+        [cell.posterBackgroundView setImageWithURL:posterLowResURL];
+    }
+    else {
+        cell.posterView.image = nil;
+    }
     
     // high res poster image
-    NSString *highResBaseString = @"https://image.tmdb.org/t/p/original";
-    NSString *fullHighResPosterURLString = [highResBaseString stringByAppendingString:posterURLString];
-    NSURL *posterHighResURL = [NSURL URLWithString:fullHighResPosterURLString];
-    [cell.posterView setImageWithURL:posterHighResURL];
-    [cell.posterBackgroundView setImageWithURL:posterHighResURL];
+    if ([movie[@"poster_path"] isKindOfClass:[NSString class]]) {
+        
+        NSString *highResBaseString = @"https://image.tmdb.org/t/p/original";
+        NSString *fullHighResPosterURLString = [highResBaseString stringByAppendingString:posterURLString];
+        NSURL *posterHighResURL = [NSURL URLWithString:fullHighResPosterURLString];
+        [cell.posterView setImageWithURL:posterHighResURL];
+        [cell.posterBackgroundView setImageWithURL:posterHighResURL];
+    }
+    else {
+        cell.posterView.image = nil;
+    }
     
+    // poster rounding + shadow
     cell.posterView.layer.cornerRadius = 6;
     cell.posterViewBg.layer.cornerRadius = 6;
     cell.posterViewBg.layer.shadowColor = UIColor.blackColor.CGColor;
@@ -159,21 +178,48 @@
 }
 
 
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    
+    // user input into search abr recieved
+    if (searchText.length != 0) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(title contains[c] %@)", searchText];
+
+        self.filteredData = [self.movies filteredArrayUsingPredicate:predicate];
+        NSLog(@"%@", self.filteredData);
+    }
+    
+    // no user search
+    else {
+        self.filteredData = self.movies;
+    }
+    
+    [self.tableView reloadData];
+ 
+}
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    searchBar.showsCancelButton = YES;
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    searchBar.showsCancelButton = NO;
+    searchBar.text = @"";
+    [searchBar resignFirstResponder];
+}
 
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+
+    // get movie dictionary to pass on to next screen
     UITableViewCell *tappedCell = sender;
     NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
     NSDictionary *movie = self.movies[indexPath.row];
     
+    // sends movie array to next controller
     DetailsViewController *detailsViewController = [segue destinationViewController];
     detailsViewController.movie = movie;
-    
-    
+     
 }
 
 

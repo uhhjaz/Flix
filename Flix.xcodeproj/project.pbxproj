@@ -10,6 +10,7 @@
 		380F96477107296CBB8CF811 /* Pods_FlixTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C40EFD6A5A6CC6376FFD8C /* Pods_FlixTests.framework */; };
 		3A78EF5B24A650E1008FB9D1 /* MovieTrailerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A78EF5A24A650E1008FB9D1 /* MovieTrailerViewController.m */; };
 		3A78EF5D24A652E8008FB9D1 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A78EF5C24A652E8008FB9D1 /* WebKit.framework */; };
+		3A78EF6024A68D19008FB9D1 /* SearchBarReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A78EF5F24A68D19008FB9D1 /* SearchBarReusableView.m */; };
 		3A9FBDD324A3BD8400C7C461 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9FBDD224A3BD8400C7C461 /* AppDelegate.m */; };
 		3A9FBDD624A3BD8400C7C461 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9FBDD524A3BD8400C7C461 /* SceneDelegate.m */; };
 		3A9FBDDC24A3BD8400C7C461 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A9FBDDA24A3BD8400C7C461 /* Main.storyboard */; };
@@ -51,6 +52,8 @@
 		3A78EF5924A650E1008FB9D1 /* MovieTrailerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MovieTrailerViewController.h; sourceTree = "<group>"; };
 		3A78EF5A24A650E1008FB9D1 /* MovieTrailerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MovieTrailerViewController.m; sourceTree = "<group>"; };
 		3A78EF5C24A652E8008FB9D1 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		3A78EF5E24A68D19008FB9D1 /* SearchBarReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchBarReusableView.h; sourceTree = "<group>"; };
+		3A78EF5F24A68D19008FB9D1 /* SearchBarReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchBarReusableView.m; sourceTree = "<group>"; };
 		3A9FBDCE24A3BD8400C7C461 /* Flix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A9FBDD124A3BD8400C7C461 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3A9FBDD224A3BD8400C7C461 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -208,6 +211,8 @@
 				3A9FBE0D24A3EFA900C7C461 /* MovieCell.m */,
 				3A9FBE1824A490E200C7C461 /* MovieCollectionCell.h */,
 				3A9FBE1924A490E200C7C461 /* MovieCollectionCell.m */,
+				3A78EF5E24A68D19008FB9D1 /* SearchBarReusableView.h */,
+				3A78EF5F24A68D19008FB9D1 /* SearchBarReusableView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -471,6 +476,7 @@
 				3A78EF5B24A650E1008FB9D1 /* MovieTrailerViewController.m in Sources */,
 				3A9FBDD324A3BD8400C7C461 /* AppDelegate.m in Sources */,
 				3A9FBE0E24A3EFA900C7C461 /* MovieCell.m in Sources */,
+				3A78EF6024A68D19008FB9D1 /* SearchBarReusableView.m in Sources */,
 				3A9FBE0824A3C46F00C7C461 /* MoviesViewController.m in Sources */,
 				3A9FBE1424A462C000C7C461 /* DetailsViewController.m in Sources */,
 				3A9FBE1A24A490E200C7C461 /* MovieCollectionCell.m in Sources */,

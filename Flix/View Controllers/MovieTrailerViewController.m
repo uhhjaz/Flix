@@ -17,14 +17,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
+
     NSURL *url = [NSURL URLWithString:self.urlString];
 
     // Place the URL in a URL Request.
     NSURLRequest *request = [NSURLRequest requestWithURL:url
-                                             cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
-                                         timeoutInterval:10.0];
+                                          cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                          timeoutInterval:10.0];
     // Load Request into WebView.
     [self.trailerWebView loadRequest:request];
     
