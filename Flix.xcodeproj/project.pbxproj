@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		380F96477107296CBB8CF811 /* Pods_FlixTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C40EFD6A5A6CC6376FFD8C /* Pods_FlixTests.framework */; };
+		3A1C115D24ACEC9200B2742C /* Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1C115C24ACEC9200B2742C /* Movie.m */; };
+		3A1C116224ACFD0500B2742C /* MovieApiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1C116124ACFD0500B2742C /* MovieApiManager.m */; };
 		3A78EF5B24A650E1008FB9D1 /* MovieTrailerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A78EF5A24A650E1008FB9D1 /* MovieTrailerViewController.m */; };
 		3A78EF5D24A652E8008FB9D1 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A78EF5C24A652E8008FB9D1 /* WebKit.framework */; };
 		3A78EF6024A68D19008FB9D1 /* SearchBarReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A78EF5F24A68D19008FB9D1 /* SearchBarReusableView.m */; };
@@ -49,6 +51,10 @@
 		07C40EFD6A5A6CC6376FFD8C /* Pods_FlixTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlixTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		16DA0DA6BA9577E556876C33 /* Pods_Flix_FlixUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Flix_FlixUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		38032D80105EA51762086721 /* Pods-Flix.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flix.debug.xcconfig"; path = "Target Support Files/Pods-Flix/Pods-Flix.debug.xcconfig"; sourceTree = "<group>"; };
+		3A1C115B24ACEC9200B2742C /* Movie.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Movie.h; sourceTree = "<group>"; };
+		3A1C115C24ACEC9200B2742C /* Movie.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Movie.m; sourceTree = "<group>"; };
+		3A1C116024ACFD0500B2742C /* MovieApiManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MovieApiManager.h; sourceTree = "<group>"; };
+		3A1C116124ACFD0500B2742C /* MovieApiManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MovieApiManager.m; sourceTree = "<group>"; };
 		3A78EF5924A650E1008FB9D1 /* MovieTrailerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MovieTrailerViewController.h; sourceTree = "<group>"; };
 		3A78EF5A24A650E1008FB9D1 /* MovieTrailerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MovieTrailerViewController.m; sourceTree = "<group>"; };
 		3A78EF5C24A652E8008FB9D1 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -130,6 +136,24 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		3A1C115A24ACEC7B00B2742C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3A1C115B24ACEC9200B2742C /* Movie.h */,
+				3A1C115C24ACEC9200B2742C /* Movie.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		3A1C115F24ACFCF300B2742C /* API */ = {
+			isa = PBXGroup;
+			children = (
+				3A1C116024ACFD0500B2742C /* MovieApiManager.h */,
+				3A1C116124ACFD0500B2742C /* MovieApiManager.m */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
 		3A9FBDC524A3BD8400C7C461 = {
 			isa = PBXGroup;
 			children = (
@@ -155,7 +179,8 @@
 		3A9FBDD024A3BD8400C7C461 /* Flix */ = {
 			isa = PBXGroup;
 			children = (
-				3A9FBE0B24A3C53E00C7C461 /* Models */,
+				3A1C115F24ACFCF300B2742C /* API */,
+				3A1C115A24ACEC7B00B2742C /* Model */,
 				3A9FBE0A24A3C53800C7C461 /* Views */,
 				3A9FBE0924A3C53000C7C461 /* View Controllers */,
 				3A9FBDD124A3BD8400C7C461 /* AppDelegate.h */,
@@ -217,13 +242,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		3A9FBE0B24A3C53E00C7C461 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		424C2AA826EF35BB4AC0343D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -246,7 +264,7 @@
 				3A9FBDCA24A3BD8400C7C461 /* Sources */,
 				3A9FBDCB24A3BD8400C7C461 /* Frameworks */,
 				3A9FBDCC24A3BD8400C7C461 /* Resources */,
-				38C8A85AB4E3475CFA786510 /* [CP] Embed Pods Frameworks */,
+				2C5A8B718B5AA51358921E31 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -284,7 +302,7 @@
 				3A9FBDF024A3BD8500C7C461 /* Sources */,
 				3A9FBDF124A3BD8500C7C461 /* Frameworks */,
 				3A9FBDF224A3BD8500C7C461 /* Resources */,
-				0090F0B65AF78D5A1CBE19F6 /* [CP] Embed Pods Frameworks */,
+				13B9468824916BBFC02C23C5 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -366,7 +384,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0090F0B65AF78D5A1CBE19F6 /* [CP] Embed Pods Frameworks */ = {
+		13B9468824916BBFC02C23C5 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -405,6 +423,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		2C5A8B718B5AA51358921E31 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Flix/Pods-Flix-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Flix/Pods-Flix-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Flix/Pods-Flix-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		35B1F0CE51C56DF75D2542ED /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -425,23 +460,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		38C8A85AB4E3475CFA786510 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Flix/Pods-Flix-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Flix/Pods-Flix-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Flix/Pods-Flix-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FA37583A362B7E14D9BF89F4 /* [CP] Check Pods Manifest.lock */ = {
@@ -473,6 +491,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A1C115D24ACEC9200B2742C /* Movie.m in Sources */,
+				3A1C116224ACFD0500B2742C /* MovieApiManager.m in Sources */,
 				3A78EF5B24A650E1008FB9D1 /* MovieTrailerViewController.m in Sources */,
 				3A9FBDD324A3BD8400C7C461 /* AppDelegate.m in Sources */,
 				3A9FBE0E24A3EFA900C7C461 /* MovieCell.m in Sources */,

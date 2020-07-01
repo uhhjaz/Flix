@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Movie.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,6 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIImageView *posterView;
 @property (weak, nonatomic) IBOutlet UIImageView *posterBackgroundView;
 @property (weak, nonatomic) IBOutlet UIView *posterViewBg;
+@property (nonatomic, strong) Movie *movie;
+
+- (void)setMovie:(Movie *)movie;
 
 @end
 
